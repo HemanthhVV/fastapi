@@ -1,0 +1,17 @@
+POST http://localhost:8000/companies/
+Content-Type: application/json
+
+{
+    "name":"chellam-IT",
+    "company_market":"Food",
+    "products":[
+        {
+            "product_name":"Chellam-panneer_porota",
+            "launch_date":"2024-10-21"
+        }
+    ]
+}
+
+###
+
+GET http://localhost:8000/companies?market=food
