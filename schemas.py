@@ -1,5 +1,5 @@
 from enum import Enum
-from pydantic import BaseModel,validator
+from pydantic import BaseModel,field_validator
 from datetime import date
 
 ## Suppose What if the user provide non useful info
@@ -32,8 +32,20 @@ class CompanyBaseModel(BaseModel):
     ## Default value is empty list
     ##  It means , if there is no product under a company , it will return an empty list
 
+
 class CompanyCreate(CompanyBaseModel):
-    pass
+    company_market: generalizeMarkets
+    ## Defining the validator(pre-validator here to get the data in the Title cased format)
+    @field_validator('company_market',mode='before')
+    @classmethod
+    def make_genre_titled(cls,value:str):
+        if not('A' <= value[0] <= 'Z') : 
+            print(
+            "Not titled case, converting to titled case"
+            )
+        return value.title()
+
+    
 
 class CompanyWithId(CompanyBaseModel):
     id:int
